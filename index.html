@@ -7,11 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homework7</title>
 
-    <style id="userStyle"></style>
+    <style id="userStyle">
+        div {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        img {
+            height: 100px;
+            margin: auto;
+        }
+
+        #button1 {
+            display: block;
+            padding: 20px 100px;
+            margin: 50px;
+            background: lightgreen;
+            border-style: none;
+            border-radius: 10px;
+            font-size: 20px;
+            transition: .3s;
+        }
+
+        #button1:hover {
+            background: lightsalmon;
+        }
+    </style>
 
 </head>
 
 <body>
+
+    <form name="form1">
+        <input type="button" id="button1" value="Создать блоки" onclick="blocks()">
+    </form>
 
 
     <div id="div1"></div>
@@ -19,49 +49,47 @@
 
     <script>
 
-        let n = prompt("Введите количество блоков:");
-        let s = "";
-    
-        let colors = ['a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
         function blocks() {
 
-            let maxpic = 1;   
+            let n = +prompt("Введите количество блоков:");
+            let s = "";
 
-            for (i = 1; i <= n; i++) {                
+            let maxpic = 1;
 
-                // let k = Math.floor(Math.random() * 10); s += `<div id="id${i}"><img src="images/${k+1}.png"></div>`; - вывести рандомную картинку.
-                            
-                if (maxpic % 11 == 0) {maxpic = 1};
-                s += `<div id="id${i}"><img src="images/${maxpic++}.png"></div>`;
+            if (n >= 1) {
 
-               
-             let cssCode = `
-            div {
-                display: flex;
-                flex-wrap: wrap;
-            }
-            #id${i} {
+                for (i = 1; i <= n; i++) {
+
+                    // let k = Math.floor(Math.random() * 10); s += `<div id="id${i}"><img src="images/${k+1}.png"></div>`; - вывести рандомную картинку.
+
+                    if (maxpic % 11 == 0) { maxpic = 1 };
+                    s += `<div id="id${i}"><img src="images/${maxpic++}.png"></div>`;
+
+
+                    let cssCode = `#id${i} {
                 width: 250px;
                 height: 250px;
                 border: 1px solid black;
-                background: ${getColor()};}
-            img {
-                height:100px;
-                margin: auto;}`
+                background: ${getColor()};}`
 
-            userStyle.innerHTML += cssCode;
+                    userStyle.innerHTML += cssCode;
 
-            div1.innerHTML = s;
-                       
-            }       
-            
+                    div1.innerHTML = s;
+
+                }
+
+                form1.button1.value = "Обновить блоки"
+
+            }
+
+            else { alert("Вы ввели неверное число") }
 
         }
 
-        blocks();
-
         function getColor() {
+
+            let colors = ['a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
             let c = "#";
             for (j = 1; j <= 6; j++) {
                 let a = Math.floor(Math.random() * colors.length);
@@ -70,7 +98,6 @@
             console.log(c);
             return (c);
         }
-
 
 
     </script>
